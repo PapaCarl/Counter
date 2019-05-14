@@ -27,14 +27,20 @@ export class CounterService {
 
   constructor() { }
 
+  /**
+   * return initial data
+   */
   get data(): Deposit[] {
     return this.$initialData;
   }
 
+  /**
+   * return function increment or decrement depend on deposit operation
+   * @param item
+   */
   public changeCount(item: Deposit) {
     let value = item.value;
     const count = item.count;
-
     switch (item.operation) {
       case 'increment':
         return () => {
@@ -43,19 +49,19 @@ export class CounterService {
         };
         break;
       case 'decrement':
-        value = this.decrease(value, count);
-        return value;
+        return () => {
+          value = this.decrease(value, count);
+          return value;
+        };
         break;
     }
   }
-  makeCounter() {
-    let currentCount = 1;
 
-    return () => {
-      return currentCount++;
-    };
-  }
-
+  /**
+   * increase value  count per time
+   * @param value
+   * @param count
+   */
   private increase(value: number, count: number): number {
     for (let i = 0; i < count; i++) {
       value ++;
@@ -63,6 +69,11 @@ export class CounterService {
     return value;
   }
 
+  /**
+   * decrease value  count per time
+   * @param value
+   * @param count
+   */
   private decrease(value: number, count: number): number {
     for (let i = 0; i < count; i++) {
       value --;
