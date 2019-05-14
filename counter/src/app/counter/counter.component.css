@@ -1,0 +1,12 @@
+.boards {
+  display: flex;
+  justify-content: center;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+}
+button  {
+  margin: 0 20px;
+}

@@ -1,0 +1,8 @@
+<div class="boards">
+  <app-board *ngFor="let item of values" [value]="item['value']"></app-board>
+</div>
+<div class="buttons">
+  <button mat-raised-button color="primary" (click)="startGenerator()">Start</button>
+  <button mat-raised-button color="warn" (click)="stopGenerator()">Stop</button>
+  <button mat-raised-button color="accent" (click)="initValues()">Reset</button>
+</div>
