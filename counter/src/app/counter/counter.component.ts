@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CounterService} from './counter.service';
 import {interval, Observable, Subscription} from 'rxjs';
-import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'app-counter',
@@ -14,7 +13,10 @@ export class CounterComponent implements OnInit {
   private subscription: Subscription;
   private isActiveGenerator: boolean = false;
 
-  values: any;
+  /**
+   * array objects from value and function which change the value
+   */
+  public values: Array<{value: number, changeValue: any}>;
 
   constructor(
     private counterService: CounterService
@@ -24,6 +26,9 @@ export class CounterComponent implements OnInit {
     this.initValues();
   }
 
+  /**
+   * initializing start data
+   */
   initValues() {
     this.values = this.counterService.data.map(item => {
       const value = item.value;
@@ -32,6 +37,9 @@ export class CounterComponent implements OnInit {
     });
   }
 
+  /**
+   * start to dispatch "change" action
+   */
   startGenerator() {
     if (!this.isActiveGenerator) {
       this.isActiveGenerator = true;
@@ -43,6 +51,9 @@ export class CounterComponent implements OnInit {
     }
   }
 
+  /**
+   * stop to dispatch "change" action
+   */
   stopGenerator() {
     this.subscription.unsubscribe();
     this.isActiveGenerator = false;
